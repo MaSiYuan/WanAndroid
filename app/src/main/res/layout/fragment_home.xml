@@ -16,10 +16,11 @@
     </android.support.design.widget.AppBarLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <cn.msy.wanandroid.widget.VRecyclerView
+        <cn.msy.wanandroid.widget.ScrollVRecyclerView
             android:id="@+id/rv_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

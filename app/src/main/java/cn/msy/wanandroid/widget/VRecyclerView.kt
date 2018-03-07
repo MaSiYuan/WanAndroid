@@ -9,7 +9,7 @@ import android.util.AttributeSet
  * 垂直方向RecyclerView
  * @author msy
  */
-class VRecyclerView : RecyclerView {
+open class VRecyclerView : RecyclerView {
     constructor(context: Context) : super(context) {
         setVerticalManager()
     }

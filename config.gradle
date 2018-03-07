@@ -61,6 +61,7 @@ ext {
             "zxing-android-embedded"     : "com.journeyapps:zxing-android-embedded:3.5.0",
             "banner"                     : "com.youth.banner:banner:1.4.10",
             "navigation-tab-bar"         : "devlight.io:navigationtabbar:1.2.5",
+            "agent-web"                  : "com.just.agentweb:agentweb:4.0.2",
 
             //rx1
             "rxandroid"                  : "io.reactivex:rxandroid:1.2.1",

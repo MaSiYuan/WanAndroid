@@ -9,7 +9,7 @@ import android.util.AttributeSet
  * 水平方向RecyclerView
  * @author msy
  */
-class HRecyclerView : RecyclerView {
+open class HRecyclerView : RecyclerView {
 
     constructor(context: Context) : super(context) {
         setHorizontalManager()

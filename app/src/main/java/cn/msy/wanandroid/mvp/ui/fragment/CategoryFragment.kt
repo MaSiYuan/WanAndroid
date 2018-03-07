@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -16,11 +17,24 @@ import cn.msy.wanandroid.mvp.contract.CategoryContract
 import cn.msy.wanandroid.mvp.presenter.CategoryPresenter
 
 import cn.msy.wanandroid.R
+import cn.msy.wanandroid.mvp.model.resp.Category
+import cn.msy.wanandroid.mvp.ui.activity.MainActivity
+import cn.msy.wanandroid.mvp.ui.activity.SubCategoryActivity
+import cn.msy.wanandroid.mvp.ui.adapter.CategoryAdapter
+import com.chad.library.adapter.base.BaseQuickAdapter
 
 import com.jess.arms.utils.Preconditions.checkNotNull
+import kotlinx.android.synthetic.main.fragment_category.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class CategoryFragment : BaseFragment<CategoryPresenter>(), CategoryContract.View {
+
+    val adapter: CategoryAdapter = CategoryAdapter(R.layout.category_recycle_item)
+
+    override fun showCategory(category: List<Category?>?) {
+        adapter.setNewData(category)
+    }
 
     override fun setupFragmentComponent(appComponent: AppComponent) {
         DaggerCategoryComponent //如找不到该类,请编译一下项目
@@ -36,7 +50,18 @@ class CategoryFragment : BaseFragment<CategoryPresenter>(), CategoryContract.Vie
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        rv_category.adapter = adapter
+        rv_category.onHRecyclerViewScrolledListener = activity as MainActivity
 
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val category: Category = adapter.getItem(position) as Category
+            Intent(activity, SubCategoryActivity::class.java).run {
+                putExtra("data", category)
+                startActivity(this)
+            }
+        }
+
+        mPresenter.getCategory()
     }
 
     /**

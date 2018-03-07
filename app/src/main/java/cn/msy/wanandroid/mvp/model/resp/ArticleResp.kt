@@ -1,6 +1,7 @@
 package cn.msy.wanandroid.mvp.model.resp
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 /**

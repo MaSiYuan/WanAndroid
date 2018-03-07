@@ -1,15 +1,18 @@
 package cn.msy.wanandroid.mvp.ui.activity
 
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import cn.msy.wanandroid.R
 import cn.msy.wanandroid.di.component.DaggerMainComponent
 import cn.msy.wanandroid.di.module.MainModule
 import cn.msy.wanandroid.mvp.contract.MainContract
 import cn.msy.wanandroid.mvp.presenter.MainPresenter
 import cn.msy.wanandroid.mvp.ui.adapter.MainAdapter
+import cn.msy.wanandroid.widget.ScrollVRecyclerView
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
@@ -18,9 +21,21 @@ import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
+class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, ScrollVRecyclerView.OnHRecyclerViewScrolledListener {
 
-    val models:ArrayList<NavigationTabBar.Model>  = ArrayList()
+    override fun bottomBarShow() {
+//        ntb_home.visibility = View.VISIBLE
+//        ObjectAnimator.ofFloat(ntb_home, "translateY", 0f, ntb_home.height.toFloat())
+//                .start()
+    }
+
+    override fun bottomBarHide() {
+//        ntb_home.visibility = View.GONE
+//        ObjectAnimator.ofFloat(ntb_home, "translateY", ntb_home.height.toFloat(), 0f)
+//                .start()
+    }
+
+    val models: ArrayList<NavigationTabBar.Model> = ArrayList()
     val adapter: MainAdapter = MainAdapter(supportFragmentManager)
 
     override fun setupActivityComponent(appComponent: AppComponent) {
@@ -64,6 +79,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         )
         ntb_home.models = models
         ntb_home.setViewPager(vp_home)
+        ntb_home.isBehaviorEnabled = true
     }
 
 

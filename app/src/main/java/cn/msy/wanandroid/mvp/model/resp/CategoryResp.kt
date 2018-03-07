@@ -1,6 +1,7 @@
 package cn.msy.wanandroid.mvp.model.resp
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 /**
@@ -22,7 +23,7 @@ data class Category(
         @SerializedName("order") val order: Int? = 0,
         @SerializedName("parentChapterId") val parentChapterId: Int? = 0,
         @SerializedName("visible") val visible: Int? = 0
-)
+):Serializable
 
 data class SubCategory(
         @SerializedName("children") val children: List<Any?>? = listOf(),
@@ -32,4 +33,4 @@ data class SubCategory(
         @SerializedName("order") val order: Int? = 0,
         @SerializedName("parentChapterId") val parentChapterId: Int? = 0,
         @SerializedName("visible") val visible: Int? = 0
-)
+):Serializable

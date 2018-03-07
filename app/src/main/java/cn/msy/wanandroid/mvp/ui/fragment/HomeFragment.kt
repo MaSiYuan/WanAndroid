@@ -14,11 +14,12 @@ import cn.msy.wanandroid.mvp.contract.HomeContract
 import cn.msy.wanandroid.mvp.model.resp.Article
 import cn.msy.wanandroid.mvp.model.resp.Banner
 import cn.msy.wanandroid.mvp.presenter.HomePresenter
+import cn.msy.wanandroid.mvp.ui.activity.ContentActivity
+import cn.msy.wanandroid.mvp.ui.activity.MainActivity
 import cn.msy.wanandroid.mvp.ui.adapter.HomeAdapter
 import com.bumptech.glide.Glide
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
-import com.jess.arms.http.imageloader.glide.GlideArms
 import com.jess.arms.utils.ArmsUtils
 import com.jess.arms.utils.Preconditions.checkNotNull
 import com.youth.banner.loader.ImageLoader
@@ -65,6 +66,14 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         val header: View = LayoutInflater.from(context).inflate(R.layout.home_banner_view, rv_home, false)
         adapter?.addHeaderView(header)
         rv_home.adapter = adapter
+        rv_home.onHRecyclerViewScrolledListener = activity as MainActivity
+        adapter?.setOnItemClickListener { adapter, view, position ->
+            val item = adapter.getItem(position) as Article
+            val intent: Intent = Intent(activity, ContentActivity::class.java)
+            intent.putExtra("title", item.title)
+            intent.putExtra("url", item.link)
+            startActivity(intent)
+        }
 
         mPresenter.getArticle(0)
         mPresenter.getBanner()
